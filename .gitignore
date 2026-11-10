@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+# 작업 산출물·고객/회사 자료는 저장소에 포함하지 않음
+*.html
+!manual-explainer/assets/template.html
+*.pptx
+*.ppt
+*.docx
+*.doc
+*.pdf
+mx*/
+pages/
+.env
+manual-explainer.skill
