@@ -22,7 +22,7 @@ A skill (SKILL.md) for Claude and other AI agents. Give it a manual; it reads th
 ## Use
 Attach a manual and ask, for example:
 - “Turn this manual into an explainer app”
-- “帮我讲解一下这个说明书” / “이 매뉴얼 설명해주는 앱 만들어줘”
+- “Walk me through this manual so I can ask questions” (requests in any language work)
 - then “Export it as PPT with the narration”
 
 ## Requirements
@@ -42,13 +42,8 @@ manual-explainer/
 ```
 
 ## License
-Proprietary — © 2026 김세휘 (nick334455). All rights reserved. Use requires a license obtained through an authorized channel; redistribution or resale is not permitted. See [LICENSE](LICENSE).
+Proprietary — © 2026 nick (nick334455). All rights reserved. Use requires a license obtained through an authorized channel; redistribution or resale is not permitted. See [LICENSE](LICENSE).
 Third-party tools and their licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Notes
 - Do not commit manuals or generated apps to this repository (`.gitignore` blocks them).
-
----
-
-## 한국어 요약
-설명서(PPT·Word·PDF)를 **음성 강의 + 중간 질문이 가능한 앱**으로 만들고, 같은 내용을 **설명 대본이 들어간 PPT**로도 내보내는 스킬입니다. 한국어·중국어·영어 전환, 자연스러운 음성 자동 선택, 슬라이드 확대 뷰어, 퀴즈·용어집, 민감정보 자동 마스킹을 지원합니다. 설치·사용법과 요구 사항은 위 영문 설명을 참고하세요. 이 스킬은 저작권자 소유이며(All rights reserved), 정식 경로로 라이선스를 받은 경우에만 사용할 수 있고 재배포·재판매는 허용되지 않습니다.
