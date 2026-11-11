@@ -1,6 +1,6 @@
 ---
 name: manual-explainer
-description: Turn a user's manual / instruction document (PPT/PPTX, Word DOC/DOCX or PDF) into an interactive explainer app — a narrated, step-by-step lesson in Chinese, Korean and English (switchable in the app) built from the manual's own pages, with voice playback, chapter quizzes and an "interrupt & ask" button that pauses the lesson, answers questions from the manual with page citations, then resumes where it stopped. Use whenever the user uploads or links a manual, 说明书, 操作手册, 使用说明, 培训资料, SOP, 매뉴얼, 사용설명서, 교육자료 or instruction deck and wants it explained, taught, walked through, turned into a 讲解/教学/培训 app, 讲解视频-like tool, tutorial or training page — even if they don't say "app" (e.g. "帮我讲解一下这个说明书", "把这个手册做成可以提问的教学", "이 매뉴얼 설명해주는 앱 만들어줘", "walk me through this manual").
+description: Turn a user's manual / instruction document (PPT/PPTX, Word DOC/DOCX or PDF) into an interactive explainer app — a narrated, step-by-step lesson in Chinese, Korean and English (switchable in the app) built from the manual's own pages, with voice playback, chapter quizzes and an "interrupt & ask" button that pauses the lesson, answers questions from the manual with page citations, then resumes where it stopped. It can also export the lesson as an editable PowerPoint deck with the narration (on the slides and as speaker notes). Use whenever the user uploads or links a manual, 说明书, 操作手册, 使用说明, 培训资料, SOP, 매뉴얼, 사용설명서, 교육자료 or instruction deck and wants it explained, taught, walked through, turned into a 讲解/教学/培训 app, 讲解视频-like tool, tutorial or training page — even if they don't say "app" (e.g. "帮我讲解一下这个说明书", "把这个手册做成可以提问的教学", "이 매뉴얼 설명해주는 앱 만들어줘", "walk me through this manual"), and to export such a lesson as PPT ("导出PPT", "PPT로 내보내기").
 ---
 
 # Manual Explainer
@@ -14,6 +14,15 @@ the learner is, answers from the manual with `[p.N]` page links, and
 
 The quality of the app depends almost entirely on step 2 (understanding) and
 step 3 (lesson design). The scripts handle the mechanics.
+
+## Environments
+
+Paths below are the claude.ai ones (`/mnt/user-data/uploads` for the user's file,
+`/home/claude/mx` as a work folder, `/mnt/user-data/outputs` for results). In Claude Code,
+Cursor or another agent, use the path of the user's file, any scratch folder (e.g. `./mx`)
+and an output folder in the project; everything else is the same. Requirements: Python 3 with
+python-pptx, python-docx, pdfplumber, Pillow; LibreOffice (`soffice`) and Poppler
+(`pdftoppm`); Node.js with pptxgenjs for the PowerPoint export.
 
 ## Workflow
 
@@ -119,7 +128,32 @@ lines, how to use it (▶ play, ✋ interrupt anytime, keyboard: Space / ← →
 that the first question asks permission to use their Claude usage, and any
 gaps or contradictions you found in the manual.
 
-### 6. Iterate
+### 6. Export to PowerPoint (when asked)
+
+When the user wants the lesson as a PPT/PPTX ("导出为PPT", "PPT로 만들어줘", "加上讲解内容"),
+export the same `lesson.json` — never write a second version of the content:
+
+```bash
+node $SK/scripts/export_pptx.js /home/claude/mx/lesson.json /home/claude/mx /mnt/user-data/outputs/<name>.pptx [--lang zh|ko|en] [--narration both|notes]
+```
+
+- Deck: title → contents → per chapter a divider, one slide per step (page image left, key
+  points + warning + page references right, the narration under the image) and a quiz slide
+  → glossary table. Every step's narration is also the slide's **speaker notes** (plus warning
+  and page refs), so a trainer can present it directly; quiz answers and explanations are in
+  the quiz slide's notes. One PowerPoint section per chapter.
+- `--narration notes` keeps the narration only in the notes (bigger page images) — use it
+  when the user wants clean slides for presenting. Default `both`.
+- `--lang` picks one language of a multi-language lesson (default: the lesson's default);
+  export each language separately if they want several.
+- Every text sits inside its own filled shape (no loose text box laid over a shape), fonts
+  are Microsoft YaHei / Malgun Gothic / Calibri by language, LAYOUT_WIDE 16:9, folder
+  entries are stripped from the ZIP so SharePoint/OneDrive open it.
+- Needs `pptxgenjs` (Node). If the pptx skill is available, read its SKILL.md first, then
+  validate with its `scripts/office/validate.py` and render a few slides for a visual check.
+- Deliver the .pptx with present_files (it is a download, not a published page).
+
+### 7. Iterate
 
 For changes ("第3章讲细一点", "语速太快", "加一章故障排除"), edit
 `lesson.json`, rebuild, and republish to the same artifact (pass its `url`).
