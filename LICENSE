@@ -1,0 +1,42 @@
+manual-explainer — Proprietary Software License
+Copyright (c) 2026 김세휘 (GitHub: nick334455). All rights reserved.
+
+This software, including the skill instructions (SKILL.md), scripts, templates and
+documentation in this package (the "Software"), is licensed, not sold.
+
+1. Grant. If you obtained the Software through an authorized channel and paid any
+   applicable fee (the "Licensee"), the copyright holder grants you a non-exclusive,
+   non-transferable license to install and use the Software, and to modify it, for
+   your own use or for internal use within your organization.
+
+2. Restrictions. Without prior written permission from the copyright holder, you may
+   not:
+   a) copy, redistribute, publish, sell, resell, rent, lease or sublicense the
+      Software or any modified version of it, in whole or in part;
+   b) upload or list the Software, or any work derived from it, on any marketplace,
+      repository, registry or website;
+   c) remove or alter this license or any copyright notice.
+
+3. Your content and outputs. Documents you process with the Software, and the
+   explainer apps, presentations and other files the Software generates from them,
+   are not part of the Software. Rights in them stay with you or their respective
+   owners.
+
+4. Third-party components. The Software calls third-party tools that are licensed
+   separately under their own terms (see THIRD_PARTY_NOTICES.md). This license does
+   not apply to them.
+
+5. No warranty. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A
+   PARTICULAR PURPOSE AND NON-INFRINGEMENT. Verify generated lessons against the
+   original manual before relying on them, especially safety-related content.
+
+6. Limitation of liability. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+   CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+   SOFTWARE OR ITS USE.
+
+7. Termination. This license ends automatically if you breach it. On termination you
+   must stop using and delete all copies of the Software.
+
+For permissions beyond this license, contact the copyright holder via
+https://github.com/nick334455.
