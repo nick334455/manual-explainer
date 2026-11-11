@@ -11,14 +11,14 @@ default shown first. `build_app.py` lists every field missing a language.
 ```json
 {
   "languages": ["zh", "ko", "en"],
-  "language": "zh",
-  "title": {"zh": "XR-200 操作讲解", "ko": "XR-200 조작 설명", "en": "XR-200 Operation Guide"},
+  "language": "en",
+  "title": {"zh": "…", "ko": "…", "en": "XR-200 Operation Guide"},
   "chapters": [{
-    "title": {"zh": "开机准备", "ko": "전원 투입 준비", "en": "Power-on preparation"},
+    "title": {"zh": "…", "ko": "…", "en": "Power-on preparation"},
     "steps": [{
       "image": 5, "page_refs": [5, 6],
-      "title": {"zh": "上电前检查", "ko": "전원 투입 전 점검", "en": "Pre-power check"},
-      "bullets": {"zh": ["急停已复位"], "ko": ["비상정지 해제 확인"], "en": ["E-stop released"]},
+      "title": {"zh": "…", "ko": "…", "en": "Pre-power check"},
+      "bullets": {"zh": ["…"], "ko": ["…"], "en": ["E-stop released"]},
       "warning": {"zh": "…", "ko": "…", "en": "…"},
       "narration": {"zh": "…", "ko": "…", "en": "…"}
     }],
@@ -27,7 +27,7 @@ default shown first. `build_app.py` lists every field missing a language.
               "answer": 1,
               "explain": {"zh": "…", "ko": "…", "en": "…"}}]
   }],
-  "glossary": [{"term": {"zh": "原点复归", "ko": "원점 복귀", "en": "Homing"},
+  "glossary": [{"term": {"zh": "…", "ko": "…", "en": "Homing"},
                 "def": {"zh": "…", "ko": "…", "en": "…"}}],
   "knowledge": "[[p1]]\n…original-language text…"
 }
@@ -44,36 +44,36 @@ missing. Page numbers are 1-based and refer to `content.json` / `pages/pN.jpg`.
 
 ```json
 {
-  "title": "XX设备 操作说明 讲解",
-  "subtitle": "基于《XX操作手册 v2.1》",
-  "language": "zh",
+  "title": "XX Machine Operation Guide",
+  "subtitle": "Based on the XX Operation Manual v2.1",
+  "language": "en",
   "chapters": [
     {
-      "title": "开机与初始化",
-      "summary": "一句话说明本章学完能做什么",
+      "title": "Power-on and initialization",
+      "summary": "One sentence on what the learner can do after this chapter",
       "steps": [
         {
           "id": "c1s1",
-          "title": "上电前检查",
+          "title": "Check before power-on",
           "image": 5,
           "page_refs": [5, 6],
-          "bullets": ["确认急停按钮已复位", "确认气压 0.5–0.7 MPa"],
-          "warning": "未确认气压就上电会导致夹爪误动作。",
-          "narration": "开机之前，先做两件事。第一，看一下急停按钮……"
+          "bullets": ["E-stop button released", "Air pressure 0.5–0.7 MPa"],
+          "warning": "Powering on without the right air pressure can make the gripper misfire.",
+          "narration": "Before you switch on, check two things. First, look at the emergency stop button……"
         }
       ],
       "quiz": [
         {
-          "q": "上电前气压应在什么范围？",
-          "options": ["0.2–0.3 MPa", "0.5–0.7 MPa", "1.0 MPa 以上"],
+          "q": "What air pressure is required before power-on?",
+          "options": ["0.2–0.3 MPa", "0.5–0.7 MPa", "Above 1.0 MPa"],
           "answer": 1,
-          "explain": "手册第5页规定 0.5–0.7 MPa。"
+          "explain": "Page 5 of the manual specifies 0.5–0.7 MPa."
         }
       ]
     }
   ],
-  "glossary": [{"term": "原点复归", "def": "让各轴回到机械零点的动作"}],
-  "knowledge": "[[p1]]\n第1页清理后的全文……\n[[p2]]\n第2页……"
+  "glossary": [{"term": "Homing", "def": "Moving every axis back to its mechanical zero"}],
+  "knowledge": "[[p1]]\nCleaned full text of page 1……\n[[p2]]\nPage 2……"
 }
 ```
 
@@ -86,8 +86,8 @@ missing. Page numbers are 1-based and refer to `content.json` / `pages/pN.jpg`.
 | `language` | yes | Default language shown first: `zh`, `ko`, `en` or `ja`. Drives UI labels, the voice, and the answer language. |
 | `chapters[].title` | yes | |
 | `chapters[].steps[]` | yes, ≥1 | One idea per step. |
-| `steps[].title` | yes | Short, action-shaped ("连接气管", not "关于气管"). |
-| `steps[].narration` | yes | Spoken script. Split into sentences for TTS and highlighting, so use full sentence punctuation (。！？ or . ! ?). |
+| `steps[].title` | yes | Short, action-shaped ("Connect the air hose", not "About the air hose"). |
+| `steps[].narration` | yes | Spoken script. Split into sentences for TTS and highlighting, so use full sentence punctuation (. ! ? or the equivalent CJK marks). |
 | `steps[].image` | no | Integer page number whose image is shown next to the step. |
 | `steps[].page_refs` | no | Integers; shown as tappable page chips and used to bias Q&A retrieval. |
 | `steps[].bullets` | no | 2–4 short key points the eye can scan while listening. |
@@ -101,6 +101,6 @@ missing. Page numbers are 1-based and refer to `content.json` / `pages/pN.jpg`.
 
 - Speak, don't recite: explain what to do, why it matters and what goes wrong if skipped. The manual text itself is on the page image and in `knowledge`.
 - Chinese/Korean/Japanese: about 60–220 characters per step. English: about 40–140 words.
-- Spell out symbols the voice reads badly: "0.5到0.7兆帕" rather than "0.5–0.7MPa" inside narration (bullets may keep the symbols).
-- Refer to what is on the shown page image ("右上角红色的那个按钮") so listening and looking line up.
+- Spell out symbols the voice reads badly: "0.5 to 0.7 megapascals" rather than "0.5–0.7MPa" inside narration (bullets may keep the symbols).
+- Refer to what is on the shown page image ("the red button in the top-right corner") so listening and looking line up.
 - When the manual's language differs from `language`, explain in `language` and keep the manual's exact UI labels/button names in the original, in quotes or parentheses, the first time they appear — the learner will see those labels on the real screen.
