@@ -1,16 +1,16 @@
 ---
 name: manual-explainer
-description: Turn a user's manual / instruction document (PPT/PPTX, Word DOC/DOCX or PDF) into an interactive explainer app — a narrated, step-by-step lesson in Chinese, Korean and English (switchable in the app) built from the manual's own pages, with voice playback, chapter quizzes and an "interrupt & ask" button that pauses the lesson, answers questions from the manual with page citations, then resumes where it stopped. It can also export the lesson as an editable PowerPoint deck with the narration (on the slides and as speaker notes). Use whenever the user uploads or links a manual, 说明书, 操作手册, 使用说明, 培训资料, SOP, 매뉴얼, 사용설명서, 교육자료 or instruction deck and wants it explained, taught, walked through, turned into a 讲解/教学/培训 app, 讲解视频-like tool, tutorial or training page — even if they don't say "app" (e.g. "帮我讲解一下这个说明书", "把这个手册做成可以提问的教学", "이 매뉴얼 설명해주는 앱 만들어줘", "walk me through this manual"), and to export such a lesson as PPT ("导出PPT", "PPT로 내보내기").
+description: Turn a user's manual / instruction document (PPT/PPTX, Word DOC/DOCX or PDF) into an interactive explainer app — a narrated, step-by-step lesson in Chinese, Korean and English (switchable in the app) built from the manual's own pages, with voice playback, chapter quizzes and an "interrupt & ask" button that pauses the lesson, answers questions from the manual with page citations, then resumes where it stopped. It can also export the lesson as an editable PowerPoint deck with the narration (on the slides and as speaker notes). Use whenever the user uploads or links a manual, operating guide, user guide, training material, SOP or instruction deck (in any language) and wants it explained, taught, walked through, or turned into a lesson, tutorial, training page or explainer app — even if they do not say "app" (e.g. "walk me through this manual", "explain this guide so I can ask questions") — and to export such a lesson as PPT.
 ---
 
 # Manual Explainer
 
 Build a self-contained HTML "lesson app" from a manual:
 pages are shown as images, each step is narrated in Chinese, Korean or English — switchable any time (browser
-text-to-speech, with sentence highlighting), and the learner can press **✋ 打断提问** at any moment.
+text-to-speech, with sentence highlighting), and the learner can press **✋ Interrupt & ask** at any moment.
 That pauses the narration mid-sentence, opens a question panel that knows where
 the learner is, answers from the manual with `[p.N]` page links, and
-**▶ 继续讲解** resumes from the interrupted sentence.
+**▶ Continue** resumes from the interrupted sentence.
 
 The quality of the app depends almost entirely on step 2 (understanding) and
 step 3 (lesson design). The scripts handle the mechanics.
@@ -83,7 +83,7 @@ Design principles:
 - **Coverage check:** every page should appear in some step's `image` or
   `page_refs`, except cover, table of contents, blank and legal pages. The
   build report prints `uncovered_pages`; fix gaps that carry real content.
-- **Languages (default: 中文 / 한국어 / English):** build every lesson in
+- **Languages (default: Chinese / Korean / English):** build every lesson in
   all three — `"languages": ["zh","ko","en"]` — so the learner can switch in
   the app's header at any time. Set `language` (the default) to the language
   the user is talking to you in. Only build fewer languages when the user asks.
@@ -101,7 +101,7 @@ Design principles:
 ### 4. Build
 
 ```bash
-python $SK/scripts/build_app.py /home/claude/mx/lesson.json /home/claude/mx /mnt/user-data/outputs/<name>-讲解.html
+python $SK/scripts/build_app.py /home/claude/mx/lesson.json /home/claude/mx /mnt/user-data/outputs/<name>-lesson.html
 ```
 
 The build validates the lesson (fix and rerun on `LESSON ERROR`), masks
@@ -130,7 +130,7 @@ gaps or contradictions you found in the manual.
 
 ### 6. Export to PowerPoint (when asked)
 
-When the user wants the lesson as a PPT/PPTX ("导出为PPT", "PPT로 만들어줘", "加上讲解内容"),
+When the user wants the lesson as a PPT/PPTX ("export it as PPT", "make it a PowerPoint", "include the narration"),
 export the same `lesson.json` — never write a second version of the content:
 
 ```bash
@@ -155,7 +155,7 @@ node $SK/scripts/export_pptx.js /home/claude/mx/lesson.json /home/claude/mx /mnt
 
 ### 7. Iterate
 
-For changes ("第3章讲细一点", "语速太快", "加一章故障排除"), edit
+For changes ("explain chapter 3 in more detail", "the voice is too fast", "add a troubleshooting chapter"), edit
 `lesson.json`, rebuild, and republish to the same artifact (pass its `url`).
 
 ## Security (company documents)
@@ -167,13 +167,13 @@ license keys or customer data.
   bullets or your replies; report only *that* N items were masked and of which kind.
 - If a manual's default credential is genuinely part of a procedure (e.g. "log
   in as admin with the initial password"), describe the step and point to the
-  page ("初始密码见手册第12页，或向管理员获取") instead of stating the value.
+  page ("the initial password is on page 12 of the manual, or ask your administrator") instead of stating the value.
 - Do not upload the manual to any external service; everything runs locally
   and in the published page.
 
 ## What the app does (for answering user questions about it)
 
-- Header: title, language switcher (中文 / 한국어 / EN — switching keeps the current step and works mid-lesson or inside the ask panel), 🔊 voice panel, speed 0.8–1.5×; progress bar.
+- Header: title, language switcher (Chinese / Korean / English — switching keeps the current step and works mid-lesson or inside the ask panel), 🔊 voice panel, speed 0.8–1.5×; progress bar.
 - Voice: the app ranks the browser's voices and picks the most natural one automatically (Edge “Natural/Online” neural voices > Apple Enhanced/Premium > Google voices > others). The 🔊 panel lists them (★ = natural), offers a preview and remembers the choice per language. When only robotic voices exist it says so and suggests Edge / a Google voice / downloading an enhanced voice. Pre-recorded audio is not possible: a published page cannot call a TTS service and audio would exceed the size limit.
 - Contents drawer (☰ on mobile): chapters, steps (visited ones marked), quizzes, glossary.
 - Step card: page image, title, key points, warning, narration with the current sentence highlighted, page chips.
@@ -181,8 +181,8 @@ license keys or customer data.
 - Page viewer (tap a slide, page chip or [p.N] link): pinch / mouse-wheel zoom up to 6×, drag to pan, double-tap to zoom, − ⤢ + buttons, ‹ › to flip through every embedded page; keyboard + − 0 ← → Esc. On a portrait phone it suggests turning the phone sideways.
 - Autoplay continues across steps and stops at each chapter quiz.
 - ✋ ask panel: context line showing the current position, suggestion chips
-  (再讲一遍 / 更简单 / 举例 / 为什么重要 / 常见错误), streaming answers with clickable `[p.N]`,
-  Stop button, ▶ 继续讲解 resumes from the interrupted sentence.
+  (explain again / simpler / example / why it matters / common mistakes), streaming answers with clickable `[p.N]`,
+  Stop button, ▶ Continue resumes from the interrupted sentence.
 - Position, voice and speed are remembered per viewer.
 - Voices depend on the viewer's browser/OS; without a matching voice the app
   still advances by reading time with highlighting.
