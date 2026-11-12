@@ -722,6 +722,7 @@ async function ask(question){
     if (code === 'cancelled'){ /* user stopped */ }
     else if (code === 'not_granted'){ aiState = 'local'; addMsg('note', esc(S.denied)); localAnswer(question, true); }
     else if (code === 'rate_limited'){ addMsg('note', esc(S.limited)); }
+    else if (!(e && e.text)){ addMsg('note', esc(S.err)); localAnswer(question, true); }  // e.g. permission dismissed: still show the manual's passages
     else { addMsg('note', esc(S.err)); }
   } finally { busy = false; ctl = null; $('sendBtn').textContent = S.send; }
 }
