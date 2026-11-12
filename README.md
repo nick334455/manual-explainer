@@ -42,7 +42,7 @@ manual-explainer/
 ```
 
 ## License
-Proprietary — © 2026 nick (nick334455). All rights reserved. Use requires a license obtained through an authorized channel; redistribution or resale is not permitted. See [LICENSE](LICENSE).
+Free to use — © 2026 nick (nick334455). Anyone may use and modify it for their own work or inside their organization at no cost; redistribution, resale or re-listing elsewhere is not permitted. See [LICENSE](LICENSE).
 Third-party tools and their licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Notes
